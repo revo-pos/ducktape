@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"crypto/subtle"
 	"errors"
 	"log"
 	"log/slog"
@@ -23,6 +24,40 @@ const (
 	defaultDrainDelay = 10 * time.Second
 	shutdownTimeout   = 5 * time.Minute
 )
+
+// basicAuthMiddleware provides basic authentication if AUTH_USERNAME and AUTH_PASSWORD are set
+func basicAuthMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		username := os.Getenv("AUTH_USERNAME")
+		password := os.Getenv("AUTH_PASSWORD")
+
+		// Skip auth if credentials are not configured
+		if username == "" || password == "" {
+			next.ServeHTTP(w, r)
+			return
+		}
+
+		// Get credentials from request
+		reqUsername, reqPassword, ok := r.BasicAuth()
+		if !ok {
+			w.Header().Set("WWW-Authenticate", `Basic realm="Restricted"`)
+			http.Error(w, "Unauthorized", http.StatusUnauthorized)
+			return
+		}
+
+		// Use constant time comparison to prevent timing attacks
+		usernameMatch := subtle.ConstantTimeCompare([]byte(reqUsername), []byte(username)) == 1
+		passwordMatch := subtle.ConstantTimeCompare([]byte(reqPassword), []byte(password)) == 1
+
+		if !usernameMatch || !passwordMatch {
+			w.Header().Set("WWW-Authenticate", `Basic realm="Restricted"`)
+			http.Error(w, "Unauthorized", http.StatusUnauthorized)
+			return
+		}
+
+		next.ServeHTTP(w, r)
+	})
+}
 
 func main() {
 	var level slog.Level
@@ -73,10 +108,13 @@ func main() {
 		MaxUploadBufferPerStream:     ducktape.RecommendedBufferSize * 4,  // 4 MB per stream
 	})
 
+	// Apply basic auth middleware
+	handler := basicAuthMiddleware(h2cHandler)
+
 	api.SetDraining(false)
 	server := &http.Server{
 		Addr:    "0.0.0.0:" + port,
-		Handler: h2cHandler,
+		Handler: handler,
 	}
 
 	serverErrCh := make(chan error, 1)
