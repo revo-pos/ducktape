@@ -1,17 +1,17 @@
-module github.com/artie-labs/ducktape
+module github.com/revo-pos/ducktape
 
 go 1.25.3
 
 require github.com/duckdb/duckdb-go/v2 v2.10502.0
 
 require (
-	github.com/artie-labs/ducktape/api v0.0.0
 	github.com/json-iterator/go v1.1.12
+	github.com/revo-pos/ducktape/api v0.0.0
 	golang.org/x/net v0.53.0
 	golang.org/x/sync v0.20.0
 )
 
-replace github.com/artie-labs/ducktape/api => ./api
+replace github.com/revo-pos/ducktape/api => ./api
 
 require (
 	github.com/apache/arrow-go/v18 v18.5.1 // indirect

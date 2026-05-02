@@ -1,4 +1,4 @@
-module github.com/artie-labs/ducktape/api
+module github.com/revo-pos/ducktape/api
 
 go 1.25.0
 

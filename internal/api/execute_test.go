@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/artie-labs/ducktape/api/pkg/ducktape"
-	"github.com/artie-labs/ducktape/internal/utils"
+	"github.com/revo-pos/ducktape/api/pkg/ducktape"
+	"github.com/revo-pos/ducktape/internal/utils"
 	_ "github.com/duckdb/duckdb-go/v2"
 )
 

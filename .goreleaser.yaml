@@ -1,4 +1,4 @@
-project_name: artie-ducktape
+project_name: revo-pos-ducktape
 
 version: 2
 
@@ -46,8 +46,8 @@ dockers:
   - ids:
       - ducktape
     image_templates:
-      - "artielabs/ducktape:latest-amd64"
-      - "artielabs/ducktape:{{ .Tag }}-amd64"
+      - "revo-pos/ducktape:latest-amd64"
+      - "revo-pos/ducktape:{{ .Tag }}-amd64"
     # You can have multiple Docker images.
     # GOOS of the built binaries/packages that should be used.
     # Default: `linux`.
@@ -80,8 +80,8 @@ dockers:
   - ids:
       - ducktape
     image_templates:
-      - "artielabs/ducktape:latest-arm64"
-      - "artielabs/ducktape:{{ .Tag }}-arm64"
+      - "revo-pos/ducktape:latest-arm64"
+      - "revo-pos/ducktape:{{ .Tag }}-arm64"
     goos: linux
     goarch: arm64
     skip_push: true

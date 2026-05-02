@@ -13,9 +13,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/artie-labs/ducktape/api/pkg/ducktape"
-	"github.com/artie-labs/ducktape/internal/api"
-	"github.com/artie-labs/ducktape/internal/logging"
+	"github.com/revo-pos/ducktape/api/pkg/ducktape"
+	"github.com/revo-pos/ducktape/internal/api"
+	"github.com/revo-pos/ducktape/internal/logging"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 )

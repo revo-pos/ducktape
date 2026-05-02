@@ -9,7 +9,7 @@ import (
 
 	jsoniter "github.com/json-iterator/go"
 
-	"github.com/artie-labs/ducktape/api/pkg/ducktape"
+	"github.com/revo-pos/ducktape/api/pkg/ducktape"
 )
 
 var json = jsoniter.ConfigCompatibleWithStandardLibrary

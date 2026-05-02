@@ -2,7 +2,7 @@
  align="center">
  <img
       align="center"
-      alt="Artie Transfer"
+      alt="revo-pos Transfer"
       src="https://github.com/user-attachments/assets/d85de641-4245-4795-9863-cb5082ef3881"
       style="width:100%;"
     />
@@ -11,8 +11,8 @@
 <div align="center">
   <h3>Ducktape 🦆</h3>
   <p>Lightweight REST API for DuckDB with HTTP/2 streaming support.</p>
-  <a href="https://artie.com/slack"><img src="https://img.shields.io/badge/slack-@artie-blue.svg?logo=slack"/></a>
-  <a href="https://github.com/artie-labs/ducktape/blob/master/LICENSE.txt"><img src="https://img.shields.io/badge/License-MIT-yellow.svg"/></a>
+  <a href="https://revo-pos.com/slack"><img src="https://img.shields.io/badge/slack-@revo-pos-blue.svg?logo=slack"/></a>
+  <a href="https://github.com/revo-pos/ducktape/blob/master/LICENSE.txt"><img src="https://img.shields.io/badge/License-MIT-yellow.svg"/></a>
 </div>
 
 ## What is ducktape?
@@ -23,7 +23,7 @@ Ducktape is a standalone microservice to:
 - **Query**: Fetch rows from DuckDB.
 - **Execute**: Run statements within a transaction.
 
-**Why?** DuckDB's Go driver requires CGO, which breaks cross-compilation, complicates CI/CD, and bloats Docker images. Instead of rewriting the build pipelines for [Transfer](https://github.com/artie-labs/transfer), we isolated DuckDB behind a network boundary.
+**Why?** DuckDB's Go driver requires CGO, which breaks cross-compilation, complicates CI/CD, and bloats Docker images. Instead of rewriting the build pipelines for [Transfer](https://github.com/revo-pos/transfer), we isolated DuckDB behind a network boundary.
 
 The performance penalty is small—**~90% of native throughput** over the network. Pure Go apps stay portable; ducktape handles the CGO.
 
@@ -59,8 +59,8 @@ See [BENCHMARKS.md](BENCHMARKS.md) for detailed results.
 ### Docker
 
 ```bash
-docker pull artielabs/ducktape:latest
-docker run -e DUCKTAPE_LOG="debug" --rm --publish 8080:8080 --volume $PWD:/data artielabs/ducktape:latest
+docker pull revo-pos/ducktape:latest
+docker run -e DUCKTAPE_LOG="debug" --rm --publish 8080:8080 --volume $PWD:/data revo-pos/ducktape:latest
 
 # absolute path in DSN is required when ducktape runs in Docker and writing to local file
 curl -X POST 'http://localhost:8080/api/query' \
@@ -174,12 +174,12 @@ Streams NDJSON data over HTTP/2. Each line is a `RowMessage` with a `rv` (row va
 
 - Install Go module for client.
   ```bash
-  go get github.com/artie-labs/ducktape/api
+  go get github.com/revo-pos/ducktape/api
   ```
 - Usage:
 
   ```go
-  import "github.com/artie-labs/ducktape/api/pkg/ducktape"
+  import "github.com/revo-pos/ducktape/api/pkg/ducktape"
 
   client := ducktape.NewClient("http://localhost:8080")
   ```
@@ -188,4 +188,4 @@ Streams NDJSON data over HTTP/2. Each line is a `RowMessage` with a `rv` (row va
 
 ## License
 
-MIT License. See [LICENSE](https://github.com/artie-labs/ducktape/blob/master/LICENSE.txt) for details.
+MIT License. See [LICENSE](https://github.com/revo-pos/ducktape/blob/master/LICENSE.txt) for details.

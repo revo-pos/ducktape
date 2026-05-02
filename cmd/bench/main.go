@@ -11,7 +11,7 @@ import (
 
 	"golang.org/x/sync/errgroup"
 
-	"github.com/artie-labs/ducktape/api/pkg/ducktape"
+	"github.com/revo-pos/ducktape/api/pkg/ducktape"
 )
 
 type WorkerStatistics struct {
