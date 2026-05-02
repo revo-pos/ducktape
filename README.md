@@ -169,6 +169,10 @@ Streams NDJSON data over HTTP/2. Each line is a `RowMessage` with a `rv` (row va
 
 - `PORT`: Server port (default: `8080`)
 - `DUCKTAPE_LOG`: Log level (`debug`, `info`, `warn`, `error`)
+- `AUTH_USERNAME`: Optional username for HTTP Basic Auth
+- `AUTH_PASSWORD`: Optional password for HTTP Basic Auth
+
+For authentication to be enforced both AUTH_USERNAME and AUTH_PASSWORD must be set.
 
 ## Go client
 
