@@ -50,24 +50,4 @@ release:
 		-e GITHUB_TOKEN \
 		goreleaser/goreleaser-cross:latest release --clean
 	@echo ""
-	@echo "Pushing Docker images..."
-	@TAG=$$(git describe --tags --abbrev=0 2>/dev/null || echo "latest"); \
-	echo "Pushing architecture-specific images for $$TAG..."; \
-	docker push revo-pos/ducktape:latest-amd64 && \
-	docker push revo-pos/ducktape:latest-arm64 && \
-	docker push revo-pos/ducktape:$$TAG-amd64 && \
-	docker push revo-pos/ducktape:$$TAG-arm64 && \
-	echo "" && \
-	echo "Creating and pushing multi-arch manifests..." && \
-	docker manifest rm revo-pos/ducktape:latest 2>/dev/null || true && \
-	docker manifest create revo-pos/ducktape:latest \
-		revo-pos/ducktape:latest-amd64 \
-		revo-pos/ducktape:latest-arm64 && \
-	docker manifest push revo-pos/ducktape:latest && \
-	docker manifest rm revo-pos/ducktape:$$TAG 2>/dev/null || true && \
-	docker manifest create revo-pos/ducktape:$$TAG \
-		revo-pos/ducktape:$$TAG-amd64 \
-		revo-pos/ducktape:$$TAG-arm64 && \
-	docker manifest push revo-pos/ducktape:$$TAG
-	@echo ""
 	@echo "Release complete!"
